@@ -1,95 +1,91 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+
+import React, { useEffect, useState } from "react";
+import CodeEditor from "./components/CodeEditor";
+import { setupMirageServer } from "./mirage/server";
+
+import axios from "axios";
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    setupMirageServer(); 
+  }, []);
+  
+  const [language, setLanguage] = useState<"javascript" | "python">("javascript");
+  const [code, setCode] = useState<string>("console.log(1+22)");
+  const [result, setResult] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleRunCode = async () => {
+    setIsLoading(true);
+    setResult(null); 
+
+    try {
+      const response = await axios.post("/api/execute", { language, code }, {
+        headers: { "Content-Type": "application/json" }
+      });
+    
+      const data = response.data;
+      if (data.status === "success") {
+        console.log('data output: ' + data.output);
+        setResult(data.output);
+      } else {
+        setResult(data.error || "An error occurred.");
+      }
+    } catch (error) {
+      setResult("Failed to execute the code. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+    
+  };
+
+  return (
+    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+      <h1>Online Code Editor</h1>
+
+      <div style={{ marginBottom: "10px" }}>
+        <label htmlFor="language">Choose Language: </label>
+        <select
+          id="language"
+          value={language}
+          onChange={(e) => setLanguage(e.target.value as "javascript" | "python")}
+        >
+          <option value="javascript">JavaScript</option>
+          <option value="python">Python</option>
+        </select>
+      </div>
+
+      <CodeEditor language={language} code={code} onChange={setCode} />
+
+      <button
+        onClick={handleRunCode}
+        disabled={isLoading}
+        style={{
+          marginTop: "10px",
+          padding: "10px 20px",
+          fontSize: "16px",
+          cursor: isLoading ? "not-allowed" : "pointer",
+        }}
+      >
+        {isLoading ? "Running..." : "Run Code"}
+      </button>
+
+      {result && (
+        <div
+          style={{
+            marginTop: "20px",
+            padding: "10px",
+            backgroundColor: "#f8f8f8",
+            border: "1px solid #ddd",
+            borderRadius: "5px",
+          }}
+        >
+          <strong>Result:</strong>
+          <pre>{result}</pre>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      )}
     </div>
   );
 }
