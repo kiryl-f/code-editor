@@ -7,7 +7,7 @@
   margin-bottom: 30px;
   padding-left: 25px;
   padding-right: 25px;
-  
+
   .task-container {
     background-color: #1e1e1e;
     color: white;
@@ -19,11 +19,13 @@
 
     h1 {
       font-size: 1.5rem;
+      margin-bottom: 20px;
     }
 
     p {
       font-size: 1rem;
       line-height: 1.5;
+      margin-bottom: 8px;
     }
 
     code {
@@ -34,6 +36,8 @@
     }
 
     .next-button {
+      position: relative;
+      top: 20;
       margin-top: 20px;
       padding: 10px 20px;
       font-size: 16px;
@@ -45,6 +49,13 @@
     }
   }
 
+  .sumbit-button {
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #13065e;
+  }
+
   .editor-container {
     display: flex;
     flex-direction: column;
@@ -54,22 +65,7 @@
     padding: 20px;
     box-sizing: border-box;
 
-    .language-select {
-      margin-bottom: 10px;
-
-      label {
-        color: white;
-        margin-right: 10px;
-      }
-
-      select {
-        padding: 5px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        background-color: #333;
-        color: white;
-      }
-    }
+    
 
     .monaco-editor {
       border: 1px solid #4caf50;

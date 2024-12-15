@@ -8,11 +8,16 @@ import axios from "axios";
 
 import './styles/globals.scss';
 import './styles/home.scss';
+import './styles/components/language-picker.scss';
+
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import LanguageSelect from "./components/LanguageSelect";
+
 
 interface Task {
   id: number;
+  name: string;
   description: string;
   example: string;
 }
@@ -25,28 +30,33 @@ export default function Home() {
   const tasks: Task[] = [
     {
       id: 1,
-      description: "Write a function that adds two numbers.",
-      example: "sum(1, 2) => 3",
+      name: 'Sum of numbers',
+      description: "Write a function that adds two numbers and returns the result.",
+      example: "sum(1, 2) => 3"
     },
     {
       id: 2,
-      description: "Write a function that multiplies two numbers.",
-      example: "multiply(2, 3) => 6",
+      name: 'Result of multiplication',
+      description: "Write a function that multiplies two numbers and returns the result.",
+      example: "multiply(2, 3) => 6"
     },
     {
       id: 3,
-      description: "Write a function that subtracts two numbers.",
-      example: "subtract(5, 3) => 2",
+      name: 'Substraction function',
+      description: "Write a function that subtracts two numbers and returns the result.",
+      example: "subtract(5, 3) => 2"
     },
     {
       id: 4,
-      description: "Write a function that divides two numbers.",
-      example: "divide(6, 3) => 2",
+      name: 'Division function',
+      description: "Write a function that divides two numbers and returns the result.",
+      example: "divide(6, 3) => 2"
     },
     {
       id: 5,
-      description: "Write a function that checks if a number is even.",
-      example: "isEven(4) => true",
+      name: 'Odd / even',
+      description: "Write a function that checks if a number is even and returns true or false.",
+      example: "isEven(4) => true"
     },
   ];
 
@@ -88,36 +98,29 @@ export default function Home() {
 
   const currentTask = tasks[currentTaskIndex];
 
+  
   return (
     <div>
       <Header />
 
       <div className="container">
         <div className="task-container">
-          <h1>Task {currentTask.id}: {currentTask.description}</h1>
+          <h1>Task {currentTask.id}: {currentTask.name}</h1>
+          <p style={{marginTop: '14px', marginBottom: '24px'}}><strong>{currentTask.description}</strong></p>
           <p>
             <strong>Example:</strong>
             <br />
-            <code>{currentTask.example}</code>
           </p>
-          <button onClick={handleNextTask} className="next-button">
-            Next Task
-          </button>
+          <code>{currentTask.example}</code>
+         
         </div>
 
+
         <div className="editor-container">
-          <div className="language-select">
-            <label htmlFor="language">Choose Language: </label>
-            <select
-              id="language"
-              value={language}
-              onChange={(e) => setLanguage(e.target.value as "javascript" | "python")}
-            >
-              <option value="javascript">JavaScript</option>
-              <option value="python">Python</option>
-            </select>
-          </div>
-          <CodeEditor language={language} code={code} onChange={setCode} />
+          <LanguageSelect language={language} setLanguage={setLanguage}/>
+          
+
+          <CodeEditor language={language} code={code} onChange={setCode}/>
           <button
             onClick={handleRunCode}
             disabled={isLoading}
@@ -125,6 +128,11 @@ export default function Home() {
           >
             {isLoading ? "Running..." : "Run Code"}
           </button>
+
+          <button onClick={handleNextTask} className="sumbit-button">
+            Sumbit attempt
+          </button>
+          
 
           {result && (
             <div className="result-container">
