@@ -1,47 +1,107 @@
 .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  height: 100vh;
+  padding: 20px;
+
+  h1 {
+    color: #4caf50;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .task-container {
+    background-color: #1e1e1e;
+    color: white;
+    border-radius: 5px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    padding: 20px;
-  
+    box-sizing: border-box;
+
     h1 {
-      color: #4caf50;
-      font-size: 2rem;
-      text-align: center;
-      margin-bottom: 20px;
+      font-size: 1.5rem;
     }
-  
-    .editor-output-wrapper {
-      display: flex;
-      flex: 1;
-      gap: 20px;
-  
-      .editor-container,
-      .output-container {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        background-color: #1e1e1e;
-        border: 1px solid #4caf50;
-        border-radius: 5px;
-        padding: 10px;
-        box-sizing: border-box;
-      }
-  
-      .editor-container {
-        overflow: hidden; 
-      }
-  
-      .output-container {
+
+    p {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    code {
+      background-color: #333;
+      padding: 5px;
+      border-radius: 5px;
+      color: #f8f8f8;
+    }
+  }
+
+  .editor-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #1e1e1e;
+    border: 1px solid #4caf50;
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+
+    .language-select {
+      margin-bottom: 10px;
+
+      label {
         color: white;
-  
-        pre {
-          font-family: monospace;
-          font-size: 14px;
-          white-space: pre-wrap;
-          word-wrap: break-word;
-        }
+        margin-right: 10px;
+      }
+
+      select {
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        background-color: #333;
+        color: white;
+      }
+    }
+
+    .monaco-editor {
+      border: 1px solid #4caf50;
+      border-radius: 5px;
+    }
+
+    .run-button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #4caf50;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      &:disabled {
+        background-color: #888;
+      }
+    }
+
+    .result-container {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #333;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+
+      pre {
+        font-family: monospace;
+        font-size: 14px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        color: white;
       }
     }
   }
-  
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
