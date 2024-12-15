@@ -1,0 +1,33 @@
+@import "./variables";
+@import "./mixins";
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #373747;
+  color: #ffffff;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #fff;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #45a045;
+  }
+
+  &:disabled {
+    background-color: #757575;
+    cursor: not-allowed;
+  }
+}

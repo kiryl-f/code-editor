@@ -6,6 +6,9 @@ import { setupMirageServer } from "./mirage/server";
 
 import axios from "axios";
 
+import './styles/globals.scss';
+import './styles/home.scss';
+
 export default function Home() {
 
   useEffect(() => {
@@ -77,7 +80,7 @@ export default function Home() {
           style={{
             marginTop: "20px",
             padding: "10px",
-            backgroundColor: "#f8f8f8",
+            backgroundColor: "#000",
             border: "1px solid #ddd",
             borderRadius: "5px",
           }}

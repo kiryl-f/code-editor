@@ -1,5 +1,7 @@
 import MonacoEditor from '@monaco-editor/react';
 
+import "../styles/components/code-editor.scss";
+
 interface CodeEditorProps {
   language: "javascript" | "python";
   code: string;
@@ -16,10 +18,11 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ language, code, onChange }) => 
   return (
     <div>
       <MonacoEditor
+        className="monaco-editor"
         language={language}
         value={code}
         onChange={handleEditorChange}
-        theme="vs-dark"
+        theme="hc-black"
         height="400px"
       />
     </div>

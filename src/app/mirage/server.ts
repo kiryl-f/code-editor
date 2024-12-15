@@ -32,7 +32,7 @@ export const setupMirageServer = () => {
 
             const originalConsoleLog = console.log;
             console.log = (message) => {
-              output += message + '\n'; // Append logs
+              output += message + '\n';
             };
 
             result = eval(attrs.code);
