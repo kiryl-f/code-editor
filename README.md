@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Code Editor Application
 
-## Getting Started
+This project is a simple web-based code editor that allows users to choose between two programming languages (JavaScript and Python), write code, and execute it. The application provides a set of predefined tasks, which users can solve by writing code in the editor. The code is then sent to the backend to be executed, and the result is displayed.
 
-First, run the development server:
+## Features
+
+- **Task-based Approach**: Predefined tasks that users can solve by writing code.
+- **Language Selection**: Users can choose between JavaScript and Python for coding.
+- **Code Execution**: Users can run their code and see the output.
+- **Task Navigation**: After completing a task, users can move on to the next one.
+
+## Technologies Used
+
+### Frontend
+
+- **React**: A JavaScript library for building user interfaces. It allows creating reusable components and managing the app state efficiently.
+- **Next.js**: A React framework that provides server-side rendering, static site generation, and other features like API routes.
+- **React Icons**: A library that provides popular icons as React components, used for language icons in the language selector dropdown.
+- **Axios**: A promise-based HTTP client used for making requests to the backend API.
+- **SCSS**: A preprocessor for CSS, which allows using variables, nested rules, and more, to style the app.
+- **Mirage.js**: A library for creating a mock API to simulate backend interactions for development purposes.
+
+### Backend
+
+- **Mirage.js**: This is also used on the server-side for mocking API calls. The backend of this app executes code on the server based on the selected programming language (Python or JavaScript) and returns the result.
+
+### Other Libraries
+
+- **FontAwesome**: Used for adding icons to the dropdown, though modified to be compatible with custom dropdowns.
+- **pyodide**: A library that allows running Python code in the browser by compiling the Python interpreter to WebAssembly.
+
+### Key Components
+
+- **Code Editor**: A custom code editor component that supports syntax highlighting and code editing for JavaScript and Python. 
+- **Language Selector**: A custom dropdown component for selecting between JavaScript and Python, using icons to visually represent each language.
+- **Task List**: A series of coding tasks that guide the user through solving problems.
+- **Code Execution**: An API that receives the code and runs it on the server or in the browser (via pyodide for Python).
+
+## Setup
+
+1. Clone this repository:
+    ```bash
+    git clone https://github.com/your-username/code-editor.git
+    ```
+
+2. Navigate to the project directory:
+    ```bash
+    cd code-editor
+    ```
+
+3. Install dependencies:
+    ```bash
+    npm install
+    ```
+
+4. Run the development server:
+    ```bash
+    npm run dev
+    ```
+
+5. Open your browser and go to [http://localhost:3000](http://localhost:3000).
+
+## Folder Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+├── components/              # React components (e.g., CodeEditor, Header, Footer)
+├── mirage/                  # Mock API (Mirage.js)
+├── pages/                   # Pages and routing (Next.js pages)
+├── public/                  # Static assets (images, icons, etc.)
+├── styles/                  # Global and component styles (SCSS)
+├── .gitignore               # Git ignore configuration
+├── package.json             # Project dependencies and scripts
+└── README.md                # Project documentation
