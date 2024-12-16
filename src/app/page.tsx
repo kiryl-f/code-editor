@@ -1,18 +1,17 @@
-"use client";
+"use client"
 
 import React, { useEffect, useState } from "react";
 import CodeEditor from "./components/CodeEditor";
 import { setupMirageServer } from "./mirage/server";
-
 import axios from "axios";
-
 import './styles/globals.scss';
 import './styles/home.scss';
-import './styles/components/language-picker.scss';
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import LanguageSelect from "./components/LanguageSelect";
+import { ThemeProvider } from "./theme/ThemeContext";
+
 
 
 interface Task {
@@ -42,7 +41,7 @@ export default function Home() {
     },
     {
       id: 3,
-      name: 'Substraction function',
+      name: 'Subtraction function',
       description: "Write a function that subtracts two numbers and returns the result.",
       example: "subtract(5, 3) => 2"
     },
@@ -65,6 +64,13 @@ export default function Home() {
   const [result, setResult] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
+
+  const [taskNameText, setTaskNameText] = useState("");
+  const [taskDescriptionText, setTaskDescriptionText] = useState("");
+  const [showDescription, setShowDescription] = useState(false);
+
+  const [taskName, setTaskName] = useState<string>("");
+  const [taskDescription, setTaskDescription] = useState<string>("");
 
   const handleRunCode = async () => {
     setIsLoading(true);
@@ -98,51 +104,74 @@ export default function Home() {
 
   const currentTask = tasks[currentTaskIndex];
 
-  
+  useEffect(() => {
+    const typeText = (text: string, setText: React.Dispatch<React.SetStateAction<string>>) => {
+      let index = 0;
+      const interval = setInterval(() => {
+        setText(text.substring(0, index + 1));
+        index++;
+        if (index === text.length) clearInterval(interval);
+      }, 25);
+    };
+
+    typeText(currentTask.name, setTaskNameText);
+
+    const descriptionTimeout = setTimeout(() => {
+      setShowDescription(true);
+      typeText(currentTask.description, setTaskDescriptionText);
+    }, currentTask.name.length * 25 + 500);
+
+    return () => clearTimeout(descriptionTimeout);
+  }, [currentTask]);
+
   return (
-    <div>
-      <Header />
+    <ThemeProvider>
+      <div>
+        <Header />
+        <div className="container">
+          <div className="task-container">
+            <h1>
+              Task {currentTask.id}: {taskNameText}
+            </h1>
 
-      <div className="container">
-        <div className="task-container">
-          <h1>Task {currentTask.id}: {currentTask.name}</h1>
-          <p style={{marginTop: '14px', marginBottom: '24px'}}><strong>{currentTask.description}</strong></p>
-          <p>
-            <strong>Example:</strong>
-            <br />
-          </p>
-          <code>{currentTask.example}</code>
-         
+            <p style={{ marginTop: '14px', marginBottom: '24px' }}>
+              <strong>
+                {showDescription && taskDescriptionText}
+              </strong>
+            </p>
+            <p>
+              <strong>Example:</strong>
+              <br />
+            </p>
+            <code>{currentTask.example}</code>
+          </div>
+
+          <div className="editor-container">
+            <LanguageSelect language={language} setLanguage={setLanguage} />
+            <CodeEditor language={language} code={code} onChange={setCode} />
+            <button
+              onClick={handleRunCode}
+              disabled={isLoading}
+              className="run-button"
+            >
+              {isLoading ? "Running..." : "Run Code"}
+            </button>
+
+            <button onClick={handleNextTask} className="sumbit-button">
+              Submit attempt
+            </button>
+
+            {result && (
+              <div className="result-container">
+                <strong>Result:</strong>
+                <pre>{result}</pre>
+              </div>
+            )}
+          </div>
         </div>
 
-
-        <div className="editor-container">
-          <LanguageSelect language={language} setLanguage={setLanguage}/>
-          
-
-          <CodeEditor language={language} code={code} onChange={setCode}/>
-          <button
-            onClick={handleRunCode}
-            disabled={isLoading}
-            className="run-button"
-          >
-            {isLoading ? "Running..." : "Run Code"}
-          </button>
-
-          <button onClick={handleNextTask} className="sumbit-button">
-            Sumbit attempt
-          </button>
-          
-
-          {result && (
-            <div className="result-container">
-              <strong>Result:</strong>
-              <pre>{result}</pre>
-            </div>
-          )}
-        </div>
+        <Footer />
       </div>
-      <Footer/>
-    </div>
+    </ThemeProvider>
   );
 }
