@@ -122,14 +122,14 @@ export default function Home() {
     }, currentTask.name.length * 25 + 500);
 
     return () => clearTimeout(descriptionTimeout);
-  }, [currentTask]);
+  }, []);
 
   return (
     <ThemeProvider>
-      <div>
+      <main>
         <Header />
-        <div className="container">
-          <div className="task-container">
+        <section className="container">
+          <article className="task-container">
             <h1>
               Task {currentTask.id}: {taskNameText}
             </h1>
@@ -144,9 +144,9 @@ export default function Home() {
               <br />
             </p>
             <code>{currentTask.example}</code>
-          </div>
+          </article>
 
-          <div className="editor-container">
+          <article className="editor-container">
             <LanguageSelect language={language} setLanguage={setLanguage} />
             <CodeEditor language={language} code={code} onChange={setCode} />
             <button
@@ -162,16 +162,16 @@ export default function Home() {
             </button>
 
             {result && (
-              <div className="result-container">
+              <section className="result-container">
                 <strong>Result:</strong>
                 <pre>{result}</pre>
-              </div>
+              </section>
             )}
-          </div>
-        </div>
+          </article>
+        </section>
 
         <Footer />
-      </div>
+      </main>
     </ThemeProvider>
   );
 }
