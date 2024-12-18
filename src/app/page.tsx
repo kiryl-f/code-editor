@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 import CodeEditor from "./components/CodeEditor";
 import { setupMirageServer } from "./mirage/server";
 import axios from "axios";
-import './styles/globals.scss';
-import './styles/home.scss';
+import '@/styles/globals.scss';
+import '@/styles/home.scss';
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";

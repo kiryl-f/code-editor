@@ -40,29 +40,41 @@ export const setupMirageServer = () => {
         const attrs = JSON.parse(request.requestBody);
 
         try {
-          // Check if the language is Python
           if (attrs.language === "python") {
-            // Find the matching predefined Python code
             const predefinedExecution = schema.db.codeExecutions.findBy({
               language: "python",
               code: attrs.code,
             });
 
             if (predefinedExecution) {
-              // Return the predefined output
               return {
                 status: "success",
                 output: predefinedExecution.output,
               };
             } else {
-              // Return error if the code does not match
               return {
                 status: "error",
                 error: "Code not found in predefined scripts.",
               };
             }
           } else {
-            return { status: "error", error: "Unsupported language in Mirage server" };
+            let result = "";
+            let output = "";
+
+            const originalConsoleLog = console.log;
+            console.log = (message) => {
+              output += message + "\n";
+            };
+
+            result = eval(attrs.code);
+
+            console.log = originalConsoleLog;
+
+            if (result === undefined && output) {
+              result = output.trim();
+            }
+
+            return { status: "success", output: result !== undefined ? String(result) : "No output" };
           }
         } catch (error) {
           return { status: "error", error: `Execution failed: ${error.message}` };
