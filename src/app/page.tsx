@@ -8,8 +8,14 @@ import axios from "axios";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import LanguageSelect from "./components/LanguageSelect";
-import { ThemeProvider } from "./theme/ThemeContext";
+import styled from "styled-components";
 
+
+const TestComponent = styled.div`
+  width: 300px;
+  height: 300px;
+  background-color: #ff0000;
+`
 
 
 interface Task {
@@ -123,53 +129,53 @@ export default function Home() {
   }, []);
 
   return (
-    <ThemeProvider>
-      <main>
-        <Header />
-        <section className="container">
-          <article className="task-container">
-            <h1>
-              Task {currentTask.id}: {taskNameText}
-            </h1>
+    <main>
+    
+    <Header />
+    <TestComponent/>
+    <section className="container">
+      <article className="task-container">
+        <h1>
+          Task {currentTask.id}: {taskNameText}
+        </h1>
 
-            <p style={{ marginTop: '14px', marginBottom: '24px' }}>
-              <strong>
-                {showDescription && taskDescriptionText}
-              </strong>
-            </p>
-            <p>
-              <strong>Example:</strong>
-              <br />
-            </p>
-            <code>{currentTask.example}</code>
-          </article>
+        <p style={{ marginTop: '14px', marginBottom: '24px' }}>
+          <strong>
+            {showDescription && taskDescriptionText}
+          </strong>
+        </p>
+        <p>
+          <strong>Example:</strong>
+          <br />
+        </p>
+        <code>{currentTask.example}</code>
+      </article>
 
-          <article className="editor-container">
-            <LanguageSelect language={language} setLanguage={setLanguage} />
-            <CodeEditor language={language} code={code} onChange={setCode} />
-            <button
-              onClick={handleRunCode}
-              disabled={isLoading}
-              className="run-button"
-            >
-              {isLoading ? "Running..." : "Run Code"}
-            </button>
+      <article className="editor-container">
+        <LanguageSelect language={language} setLanguage={setLanguage} />
+        <CodeEditor language={language} code={code} onChange={setCode} />
+        <button
+          onClick={handleRunCode}
+          disabled={isLoading}
+          className="run-button"
+        >
+          {isLoading ? "Running..." : "Run Code"}
+        </button>
 
-            <button onClick={handleNextTask} className="sumbit-button">
-              Submit attempt
-            </button>
+        <button onClick={handleNextTask} className="sumbit-button">
+          Submit attempt
+        </button>
 
-            {result && (
-              <section className="result-container">
-                <strong>Result:</strong>
-                <pre>{result}</pre>
-              </section>
-            )}
-          </article>
-        </section>
+        {result && (
+          <section className="result-container">
+            <strong>Result:</strong>
+            <pre>{result}</pre>
+          </section>
+        )}
+      </article>
+    </section>
 
-        <Footer />
-      </main>
-    </ThemeProvider>
+    <Footer />
+  </main>
   );
 }

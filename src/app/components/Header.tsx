@@ -2,7 +2,6 @@ import React from 'react';
 import '@/styles/components/header.scss';
 
 import { styled } from "styled-components";
-import { useTheme } from "../theme/ThemeContext";
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -30,14 +29,11 @@ const ThemeSwitcher = styled.button`
 `;
 
 const Header: React.FC = () => {
-  const { theme, toggleTheme } = useTheme();
 
   return (
     <HeaderContainer>
       <h1>Code Platform</h1>
-      <ThemeSwitcher onClick={toggleTheme}>
-        {theme === "light" ? "Switch to Dark" : "Switch to Light"}
-      </ThemeSwitcher>
+      
     </HeaderContainer>
   );
 };
