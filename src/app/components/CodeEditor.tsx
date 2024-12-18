@@ -1,6 +1,5 @@
 import MonacoEditor from '@monaco-editor/react';
 
-import "../styles/components/code-editor.scss";
 
 interface CodeEditorProps {
   language: "javascript" | "python";

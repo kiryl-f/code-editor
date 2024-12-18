@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaJsSquare } from 'react-icons/fa';
 import { FaPython } from 'react-icons/fa';
-import '../styles/components/language-select.scss';
+
 
 interface LanguageSelectProps {
   language: 'javascript' | 'python';
