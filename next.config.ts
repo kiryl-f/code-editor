@@ -7,7 +7,6 @@ const nextConfig = {
   },
   assetPrefix: isProd ? '/code-editor/' : '', // Required for GitHub Pages
   basePath: isProd ? '/code-editor' : '', // Required for GitHub Pages
-  output: 'export', // Ensure you are only using static-compatible features
   trailingSlash: true,
 };
 
