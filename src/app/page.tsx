@@ -8,14 +8,6 @@ import axios from "axios";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import LanguageSelect from "./components/LanguageSelect";
-import styled from "styled-components";
-
-
-const TestComponent = styled.div`
-  width: 300px;
-  height: 300px;
-  background-color: #ff0000;
-`
 
 
 interface Task {
@@ -132,7 +124,6 @@ export default function Home() {
     <main>
     
     <Header />
-    <TestComponent/>
     <section className="container">
       <article className="task-container">
         <h1>
