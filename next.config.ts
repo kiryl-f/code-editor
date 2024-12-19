@@ -3,10 +3,10 @@ const isProd = process.env.NODE_ENV === 'production';
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    unoptimized: true, // Needed for static exports
+    unoptimized: true,
   },
-  assetPrefix: isProd ? '/code-editor/' : '', // Required for GitHub Pages
-  basePath: isProd ? '/code-editor' : '', // Required for GitHub Pages
+  assetPrefix: isProd ? '/code-editor/' : '',
+  basePath: isProd ? '/code-editor' : '',
   trailingSlash: true,
 };
 
