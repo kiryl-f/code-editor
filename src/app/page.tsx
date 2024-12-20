@@ -65,9 +65,6 @@ export default function Home() {
   const [taskDescriptionText, setTaskDescriptionText] = useState("");
   const [showDescription, setShowDescription] = useState(false);
 
-  const [taskName, setTaskName] = useState<string>("");
-  const [taskDescription, setTaskDescription] = useState<string>("");
-
   const handleRunCode = async () => {
     setIsLoading(true);
     setResult(null);
@@ -121,52 +118,52 @@ export default function Home() {
   }, []);
 
   return (
-    <main>
-    
-    <Header />
-    <section className="container">
-      <article className="task-container">
-        <h1>
-          Task {currentTask.id}: {taskNameText}
-        </h1>
+    <main style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
 
-        <p style={{ marginTop: '14px', marginBottom: '24px' }}>
-          <strong>
-            {showDescription && taskDescriptionText}
-          </strong>
-        </p>
-        <p>
-          <strong>Example:</strong>
-          <br />
-        </p>
-        <code>{currentTask.example}</code>
-      </article>
+      <Header />
+      <section className="container">
+        <article className="task-container">
+          <h1>
+            Task {currentTask.id}: {taskNameText}
+          </h1>
 
-      <article className="editor-container">
-        <LanguageSelect language={language} setLanguage={setLanguage} />
-        <CodeEditor language={language} code={code} onChange={setCode} />
-        <button
-          onClick={handleRunCode}
-          disabled={isLoading}
-          className="run-button"
-        >
-          {isLoading ? "Running..." : "Run Code"}
-        </button>
+          <p style={{ marginTop: '14px', marginBottom: '24px' }}>
+            <strong>
+              {showDescription && taskDescriptionText}
+            </strong>
+          </p>
+          <p>
+            <strong>Example:</strong>
+            <br />
+          </p>
+          <code>{currentTask.example}</code>
+        </article>
 
-        <button onClick={handleNextTask} className="sumbit-button">
-          Submit attempt
-        </button>
+        <article className="editor-container">
+          <LanguageSelect language={language} setLanguage={setLanguage} />
+          <CodeEditor language={language} code={code} onChange={setCode} />
+          <button
+            onClick={handleRunCode}
+            disabled={isLoading}
+            className="run-button"
+          >
+            {isLoading ? "Running..." : "Run Code"}
+          </button>
 
-        {result && (
-          <section className="result-container">
-            <strong>Result:</strong>
-            <pre>{result}</pre>
-          </section>
-        )}
-      </article>
-    </section>
+          <button onClick={handleNextTask} className="sumbit-button">
+            Submit attempt
+          </button>
 
-    <Footer />
-  </main>
+          {result && (
+            <section className="result-container">
+              <strong>Result:</strong>
+              <pre>{result}</pre>
+            </section>
+          )}
+        </article>
+      </section>
+
+      <Footer />
+    </main>
   );
 }

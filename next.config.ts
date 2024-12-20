@@ -7,7 +7,7 @@ const nextConfig = {
   },
   assetPrefix: isProd ? '/code-editor/' : '',
   basePath: isProd ? '/code-editor' : '',
-  trailingSlash: true,
+  output: 'export',
 };
 
 export default nextConfig;
