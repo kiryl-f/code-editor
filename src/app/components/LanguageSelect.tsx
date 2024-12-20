@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { FaJsSquare } from 'react-icons/fa';
 import { FaPython } from 'react-icons/fa';
 
-
 interface LanguageSelectProps {
   language: 'javascript' | 'python';
   setLanguage: (language: 'javascript' | 'python') => void;
@@ -22,7 +21,11 @@ const LanguageSelect: React.FC<LanguageSelectProps> = ({ language, setLanguage }
 
   return (
     <div className="language-select-container">
-      <button className="language-select" onClick={toggleDropdown}>
+      <button
+        className="language-select"
+        onClick={toggleDropdown}
+        aria-expanded={isOpen} 
+      >
         <span className="language-icon">
           {language === 'javascript' ? <FaJsSquare /> : <FaPython />}
         </span>
@@ -36,13 +39,13 @@ const LanguageSelect: React.FC<LanguageSelectProps> = ({ language, setLanguage }
             className="dropdown-option"
             onClick={() => handleSelectLanguage('javascript')}
           >
-            <FaJsSquare style={{marginRight: '12px'}}/> JavaScript
+            <FaJsSquare style={{ marginRight: '12px' }} /> JavaScript
           </div>
           <div
             className="dropdown-option"
             onClick={() => handleSelectLanguage('python')}
           >
-            <FaPython style={{marginRight: '12px'}}/> Python
+            <FaPython style={{ marginRight: '12px' }} /> Python
           </div>
         </div>
       )}
