@@ -15,21 +15,25 @@ Technologies Used:
     MirageJS (for mocking API responses)
     SCSS (for styling)
 
-    How to Run Locally:
 
-    Clone the repository:
+How to Run Locally:
 
-git clone <repo-url>
-cd <project-folder>
+Clone the repository:
+
+    git clone https://github.com/kiryl-f/code-editor.git
+    cd code-editor
 
 Install dependencies:
 
-npm install
+    npm install
 
 Run the development server:
 
-npm run dev
+     npm run dev
 
 Open your browser and visit:
 
     http://localhost:3000
+
+The app is avaliable online:
+    https://kiryl-f.github.io/code-editor/
