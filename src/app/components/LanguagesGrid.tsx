@@ -7,7 +7,6 @@ import {
     RubyOriginal,
     GoOriginal,
     PhpOriginal,
-    CsharpOriginal,
     KotlinOriginal,
     SwiftOriginal,
     RustOriginal,

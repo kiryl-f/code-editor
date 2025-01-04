@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 import LanguagesGrid from "../components/LanguagesGrid";
 import styles from "../styles/components/Landing.module.scss";
@@ -33,6 +34,7 @@ const Home = () => {
         </section>
 
         <LanguagesGrid/>
+        <Footer/>
       </main>
     </>
   );
