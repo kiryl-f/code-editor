@@ -1,4 +1,5 @@
 import Header from "../components/Header";
+import LanguagesGrid from "../components/LanguagesGrid";
 import styles from "../styles/components/Landing.module.scss";
 
 const Home = () => {
@@ -30,6 +31,8 @@ const Home = () => {
           </p>
           <button className={styles.joinNow}>Join Now</button>
         </section>
+
+        <LanguagesGrid/>
       </main>
     </>
   );
