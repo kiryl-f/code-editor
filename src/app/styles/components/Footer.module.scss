@@ -1,14 +1,17 @@
 .footer {
     background-color: #1e1e1e;
     color: #fff;
-    padding: 2rem 1rem;
-  
+
+    padding-left: 2rem;
+    margin-top: 4rem;
+
     .container {
+      width: 100%;
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
+      justify-content: center;
+      align-items: start;
       gap: 2rem;
-      margin: 0 auto;
   
       .section {
         flex: 1;
