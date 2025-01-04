@@ -6,7 +6,6 @@ import './styles/globals.scss';
 import './styles/components/language-select.scss';
 
 import './styles/components/button.scss';
-import './styles/components/header.scss';
 import './styles/components/footer.scss';
 
 

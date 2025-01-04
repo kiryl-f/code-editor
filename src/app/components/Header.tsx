@@ -1,23 +1,20 @@
-import React from 'react';
+import Link from "next/link";
+import styles from "../styles/components/Header.module.scss";
 
-import { styled } from "styled-components";
-
-const HeaderContainer = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 32px;
-  background-color: #000;
-  color: var(--text);
-`;
-
-
-const Header: React.FC = () => {
-
+const Header = () => {
   return (
-    <HeaderContainer>
-      <h1>CodeArena</h1>
-    </HeaderContainer>
+    <header className={styles.header}>
+      <div className={styles.logo}>Code-Arena</div>
+      <nav className={styles.nav}>
+        <Link href="/">Home</Link>
+        <Link href="/about">About Us</Link>
+        <Link href="/tasks">Tasks</Link>
+      </nav>
+      <div className={styles.authButtons}>
+        <button className={styles.login}>Log In</button>
+        <button className={styles.signup}>Sign Up</button>
+      </div>
+    </header>
   );
 };
 
