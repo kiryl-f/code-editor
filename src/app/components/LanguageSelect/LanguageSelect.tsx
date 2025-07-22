@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import { FaJsSquare, FaPython } from 'react-icons/fa';
 import styles from "./LanguageSelect.module.scss";
 import { Language } from '@/app/types/language';
 import { useClickOutside } from '@/app/hooks/useClickOutside';
@@ -21,15 +20,10 @@ const LanguageSelect: React.FC<LanguageSelectProps> = ({ language, setLanguage }
     setIsOpen(!isOpen);
   };
 
-  const handleSelectLanguage = (lang: Language) => {
-    setLanguage(lang);
-    setIsOpen(false);
-  };
-
   const currentLanguage = AVALIABLE_LANGUAGES.find(lang => lang.value === language) || AVALIABLE_LANGUAGES[0];
 
   return (
-    <div className={styles.languageSelectContainer} ref={dropdownRef}>
+    <div className={styles.languageSelectContainer} onClick={toggleDropdown} ref={dropdownRef}>
        <button
         className={styles.languageSelect}
         onClick={() => setIsOpen(!isOpen)}
