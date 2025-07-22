@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import LanguageSelect from '../LanguageSelect';
+import LanguageSelect from '../LanguageSelect/LanguageSelect';
 
 test('renders the LanguageSelect component', () => {
   render(<LanguageSelect language="javascript" setLanguage={() => {}} />);

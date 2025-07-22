@@ -3,8 +3,6 @@ import { Space_Mono } from "next/font/google";
 import './styles/home.scss';
 import './styles/globals.scss';
 
-import './styles/components/language-select.scss';
-
 import './styles/components/button.scss';
 
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaJsSquare } from 'react-icons/fa';
 import { FaPython } from 'react-icons/fa';
+import styles from "./LanguageSelect.module.scss";
 
 interface LanguageSelectProps {
   language: 'javascript' | 'python';
@@ -20,29 +21,33 @@ const LanguageSelect: React.FC<LanguageSelectProps> = ({ language, setLanguage }
   };
 
   return (
-    <div className="language-select-container">
+    <div className={styles.languageSelectContainer}>
       <button
-        className="language-select"
+        className={styles.languageSelect}
         onClick={toggleDropdown}
         aria-expanded={isOpen} 
       >
-        <span className="language-icon">
+        <span className={styles.languageSelectIcon}>
           {language === 'javascript' ? <FaJsSquare /> : <FaPython />}
         </span>
-        <span className="language-label">{language === 'javascript' ? 'JavaScript' : 'Python'}</span>
-        <span className="arrow">{isOpen ? '▲' : '▼'}</span>
+        <span className={styles.languageSelectLabel}>
+          {language === 'javascript' ? 'JavaScript' : 'Python'}
+        </span>
+        <span className={styles.languageSelectArrow}>
+          {isOpen ? '▲' : '▼'}
+        </span>
       </button>
 
       {isOpen && (
-        <div className="dropdown-options">
+        <div className={styles.dropdownOptions}>
           <div
-            className="dropdown-option"
+            className={styles.dropdownOption}
             onClick={() => handleSelectLanguage('javascript')}
           >
             <FaJsSquare style={{ marginRight: '12px' }} /> JavaScript
           </div>
           <div
-            className="dropdown-option"
+            className={styles.dropdownOption}
             onClick={() => handleSelectLanguage('python')}
           >
             <FaPython style={{ marginRight: '12px' }} /> Python

@@ -1,11 +1,10 @@
-.language-select-container {
+.languageSelectContainer {
   position: relative;
   width: 200px;
   margin-bottom: 2vh;
 }
 
-
-.language-select {
+.languageSelect {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -17,27 +16,29 @@
   border-radius: 5px;
   cursor: pointer;
   width: 100%;
+  transition: background-color 0.2s;
+
+  &:hover,
+  &[aria-expanded="true"] {
+    background-color: #13065e;
+  }
 }
 
-.language-select:hover {
-  background-color: #13065e;
+.languageSelectIcon {
+  display: flex;
+  align-items: center;
 }
 
-
-.language-select .language-icon {
-  margin-right: 28px;
-}
-
-.language-select .language-label {
+.languageSelectLabel {
   flex-grow: 1;
 }
 
-.language-select .arrow {
+.languageSelectArrow {
   margin-left: 32px;
   font-size: 12px;
 }
 
-.dropdown-options {
+.dropdownOptions {
   position: absolute;
   top: 100%;
   left: 0;
@@ -47,17 +48,25 @@
   width: 100%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 10;
+  margin-top: 2px;
+  overflow: hidden;
 }
 
-.dropdown-option {
+.dropdownOption {
   display: flex;
   align-items: center;
   padding: 10px;
   color: white;
   cursor: pointer;
   transition: background-color 0.2s;
-}
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-size: 16px;
 
-.dropdown-option:hover {
-  background-color: #13065e;
+  &:hover,
+  &:focus {
+    background-color: #13065e;
+  }
 }
