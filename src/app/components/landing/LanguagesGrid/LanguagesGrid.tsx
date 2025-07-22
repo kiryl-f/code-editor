@@ -1,5 +1,5 @@
 import styles from "./LanguagesGrid.module.scss";
-import { LANGUAGES } from "../../consts/languages";
+import { LANGUAGES } from "../../../consts/languages";
 
 const LanguagesGrid = () => {
     return (

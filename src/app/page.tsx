@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import LanguagesGrid from "./components/landing/LanguagesGrid";
+import LanguagesGrid from "./components/landing/LanguagesGrid/LanguagesGrid";
 import LandingHero from "./components/landing/LandingHero";
 import LandingChallenges from "./components/landing/LandingChallenges";
 import LandingCommunity from "./components/landing/LandingCommunity";

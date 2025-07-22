@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import {
   JavascriptOriginal,
   PythonOriginal,
@@ -11,11 +11,19 @@ import {
   SwiftOriginal,
   RustOriginal,
 } from "devicons-react";
+import { FaJsSquare, FaPython } from "react-icons/fa";
+import { Language } from "../types/language";
 
 export interface LanguageInfo {
   name: string;
-  description: string;
+  description?: string;
   icon: () => React.ReactNode;
+}
+
+export interface LanguageSelectItem {
+  value: Language;
+  name: string;
+  icon: ReactNode;
 }
 
 export const LANGUAGES: LanguageInfo[] = [
@@ -70,3 +78,16 @@ export const LANGUAGES: LanguageInfo[] = [
     icon: () => <RustOriginal size={50} color="#DEA584" />,
   },
 ]; 
+
+export const AVALIABLE_LANGUAGES: LanguageSelectItem[] = [
+  {
+    name: 'JavaScript',
+    value: 'javascript',
+    icon: <FaJsSquare />
+  },
+  {
+    name: 'Python',
+    value: 'python',
+    icon: <FaPython />
+  }
+]

@@ -7,8 +7,10 @@
 .languageSelect {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: start;
+  gap: 15px;
   padding: 10px;
+  padding-left: 15px;
   font-size: 16px;
   background-color: #373747;
   color: white;
@@ -29,13 +31,10 @@
   align-items: center;
 }
 
-.languageSelectLabel {
-  flex-grow: 1;
-}
-
 .languageSelectArrow {
-  margin-left: 32px;
   font-size: 12px;
+  margin-left: auto;
+  margin-right: 10px;
 }
 
 .dropdownOptions {
@@ -56,6 +55,8 @@
   display: flex;
   align-items: center;
   padding: 10px;
+  gap: 15px;
+  padding-left: 15px;
   color: white;
   cursor: pointer;
   transition: background-color 0.2s;
@@ -69,4 +70,8 @@
   &:focus {
     background-color: #13065e;
   }
+}
+
+.dropdownOptionIcon {
+  margin-top: 5px;
 }

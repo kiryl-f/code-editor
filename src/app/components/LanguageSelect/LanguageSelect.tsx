@@ -1,37 +1,45 @@
-import React, { useState } from 'react';
-import { FaJsSquare } from 'react-icons/fa';
-import { FaPython } from 'react-icons/fa';
+import React, { useState, useRef } from 'react';
+import { FaJsSquare, FaPython } from 'react-icons/fa';
 import styles from "./LanguageSelect.module.scss";
+import { Language } from '@/app/types/language';
+import { useClickOutside } from '@/app/hooks/useClickOutside';
+import { AVALIABLE_LANGUAGES } from '@/app/consts/languages';
+
 
 interface LanguageSelectProps {
-  language: 'javascript' | 'python';
-  setLanguage: (language: 'javascript' | 'python') => void;
+  language: Language;
+  setLanguage: (language: Language) => void;
 }
 
 const LanguageSelect: React.FC<LanguageSelectProps> = ({ language, setLanguage }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useClickOutside(dropdownRef, () => setIsOpen(false));
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleSelectLanguage = (lang: 'javascript' | 'python') => {
+  const handleSelectLanguage = (lang: Language) => {
     setLanguage(lang);
     setIsOpen(false);
   };
 
+  const currentLanguage = AVALIABLE_LANGUAGES.find(lang => lang.value === language) || AVALIABLE_LANGUAGES[0];
+
   return (
-    <div className={styles.languageSelectContainer}>
-      <button
+    <div className={styles.languageSelectContainer} ref={dropdownRef}>
+       <button
         className={styles.languageSelect}
-        onClick={toggleDropdown}
-        aria-expanded={isOpen} 
+        onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
       >
         <span className={styles.languageSelectIcon}>
-          {language === 'javascript' ? <FaJsSquare /> : <FaPython />}
+          {currentLanguage.icon}
         </span>
         <span className={styles.languageSelectLabel}>
-          {language === 'javascript' ? 'JavaScript' : 'Python'}
+          {currentLanguage.name}
         </span>
         <span className={styles.languageSelectArrow}>
           {isOpen ? '▲' : '▼'}
@@ -40,18 +48,19 @@ const LanguageSelect: React.FC<LanguageSelectProps> = ({ language, setLanguage }
 
       {isOpen && (
         <div className={styles.dropdownOptions}>
-          <div
-            className={styles.dropdownOption}
-            onClick={() => handleSelectLanguage('javascript')}
-          >
-            <FaJsSquare style={{ marginRight: '12px' }} /> JavaScript
-          </div>
-          <div
-            className={styles.dropdownOption}
-            onClick={() => handleSelectLanguage('python')}
-          >
-            <FaPython style={{ marginRight: '12px' }} /> Python
-          </div>
+          {AVALIABLE_LANGUAGES.map((lang) => (
+            <div
+              key={lang.value}
+              className={styles.dropdownOption}
+              onClick={() => {
+                setLanguage(lang.value);
+                setIsOpen(false);
+              }}
+            >
+              <span className={styles.dropdownOptionIcon}>{lang.icon}</span>
+              <span>{lang.name}</span>
+            </div>
+          ))}
         </div>
       )}
     </div>
