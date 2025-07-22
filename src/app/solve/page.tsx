@@ -13,6 +13,7 @@ import { TASKS } from "../consts/tasks";
 import { useAnimatedTaskText } from "../hooks/useAnimatedTaskText";
 import TaskDetails from "../components/TaskDetails/TaskDetails";
 import TaskEditor from "../components/TaskEditor/TaskEditor";
+import { Language } from "../types/language";
 
 
 export default function Home() {
@@ -20,8 +21,8 @@ export default function Home() {
     setupMirageServer();
   }, []);
 
-  const [language, setLanguage] = useState<"javascript" | "python">("javascript");
-  const [code, setCode] = useState<string>("console.log(1 + 22);");
+  const [language, setLanguage] = useState<Language>("javascript");
+  const [code, setCode] = useState<string>("console.log('Hello, world!');");
   const [result, setResult] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
